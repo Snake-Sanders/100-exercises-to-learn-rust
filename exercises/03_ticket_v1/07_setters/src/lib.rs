@@ -3,6 +3,8 @@
 //   Even better, extract that logic and reuse it in both places. You can use
 //   private functions or private static methods for that.
 
+use core::panic;
+
 pub struct Ticket {
     title: String,
     description: String,
@@ -37,13 +39,36 @@ impl Ticket {
     pub fn title(&self) -> &String {
         &self.title
     }
+    pub fn set_title(self: &mut Self, new_title: String) {
+        if new_title.len() == 0 {
+            panic!("Title cannot be empty")
+        } else if new_title.len() > 50 {
+            panic!("Title cannot be longer than 50 bytes")
+        }
 
+        self.title = new_title;
+    }
     pub fn description(&self) -> &String {
         &self.description
+    }
+    pub fn set_description(self: &mut Self, new_description: String) {
+        if new_description.len() == 0 {
+            panic!("Description cannot be empty")
+        } else if new_description.len() > 500 {
+            panic!("Description cannot be longer than 500 bytes")
+        }
+        self.description = new_description;
     }
 
     pub fn status(&self) -> &String {
         &self.status
+    }
+
+    pub fn set_status(self: &mut Self, new_status: String) {
+        if new_status != "To-Do" && new_status != "In Progress" && new_status != "Done" {
+            panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
+        }
+        self.status = new_status;
     }
 }
 
