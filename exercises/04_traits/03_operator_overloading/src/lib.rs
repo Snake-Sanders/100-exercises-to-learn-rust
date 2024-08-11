@@ -10,14 +10,9 @@ struct Ticket {
 
 impl PartialEq for Ticket {
     fn eq(self: &Self, other: &Ticket) -> bool {
-        if &self.title == &other.title
-            && &self.description == &other.description
-            && &self.status == &other.status
-        {
-            true
-        } else {
-            false
-        }
+        self.title == other.title
+            && self.description == other.description
+            && self.status == other.status
     }
 }
 
